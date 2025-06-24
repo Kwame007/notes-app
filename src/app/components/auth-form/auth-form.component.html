@@ -1,0 +1,67 @@
+<form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+  <div>
+    <input
+      type="email"
+      placeholder="Email"
+      name="email"
+      [(ngModel)]="formData.email"
+      #email="ngModel"
+      required
+      email
+    />
+    @if (email.invalid && (email.dirty || email.touched)) {
+      <div class="alert alert-danger">
+        @if (email.errors?.['required']) {
+          <div>Email is required.</div>
+        }
+        @if (email.errors?.['email']) {
+          <div>Invalid email format.</div>
+        }
+      </div>
+    }
+  </div>
+
+  <div>
+    <input
+      type="password"
+      placeholder="Password"
+      name="password"
+      [(ngModel)]="formData.password"
+      #password="ngModel"
+      required
+      minlength="6"
+    />
+    @if (password.invalid && (password.dirty || password.touched)) {
+      <div class="alert alert-danger">
+        @if (password.errors?.['required']) {
+          <div>Password is required.</div>
+        }
+        @if (password.errors?.['minlength']) {
+          <div>Password must be at least 6 characters.</div>
+        }
+      </div>
+    }
+  </div>
+
+  <button type="submit" [disabled]="authForm.invalid">
+    {{ isSignup ? 'Sign Up' : 'Login' }}
+  </button>
+</form>
+
+@if (errorMessage) {
+  <div class="alert alert-danger">{{ errorMessage }}</div>
+}
+
+<button type="button" (click)="toggleForm()">
+  {{ isSignup ? 'Already have an account? Login' : "Don't have an account? Sign Up" }}
+</button>
+
+@if (isLogin) {
+  <div class="alert alert-success">You are logged in as {{ user?.email }}.</div>
+} @else {
+  <div class="alert alert-info">Please log in or sign up to continue.</div>
+}
+
+@if (isLogin) {
+  <button type="button" (click)="logout()">Logout</button>
+}

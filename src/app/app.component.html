@@ -1,11 +1,6 @@
-<div class="landing-container">
-  <h1>Welcome to Notely</h1>
-  <p>Your simple and secure note-taking solution.</p>
-  <div class="button-group">
-    
-    <button (click)="login()">Login</button>
-    <button (click)="signup()">Sign Up</button>
-    <button (click)="delete(2)">delete</button>
-    <button (click)="create()">create</button>
-  </div>
-</div>
+@if (isAuthenticated) {
+  <p>All notes by user</p>
+  <button (click)="logout()">Logout</button>
+} @else {
+  <app-auth-form />
+}

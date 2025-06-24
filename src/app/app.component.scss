@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
-  font-family: 'Segoe UI', Arial, sans-serif;
+  font-family: "Segoe UI", Arial, sans-serif;
 }
 
 .landing-container h1 {
@@ -37,7 +37,9 @@
   color: #fff;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(99, 102, 241, 0.1);
-  transition: background 0.2s, transform 0.2s;
+  transition:
+    background 0.2s,
+    transform 0.2s;
 }
 
 .button-group button:hover {

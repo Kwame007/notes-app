@@ -1,78 +1,48 @@
 import { Injectable } from '@angular/core';
 import { SupabaseService } from './supabase.service';
+import { Note } from '../utilities/note.model';
+import { AuthService } from './auth.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NotesServiceService {
-  private notes = [];
+  constructor(
+    private supabaseService: SupabaseService,
+    private authService: AuthService
+  ) {}
 
-  constructor(private supabaseService:SupabaseService) { }
+  async getNotes(): Promise<Note[] | null> {
+    const userId = await this.authService.getUserId();
 
-  async read() {
-    try {
-      const { data, error } = await this.supabaseService.client
-        .from('notes')
-        .select('*')
-      if (error) {
-        throw new Error(error.message);
-      }
-      console.log('Notes fetched successfully:', data);
-      // this.notes = data;
-      return data;
-    } catch (error) {
-      console.error('Error reading notes:', error);
-      throw error;
-    }
+    if (!userId) throw new Error('User not authenticated');
+
+    const { data, error } = await this.supabaseService.client
+      .from('notes')
+      .select('*')
+      // .eq('user_id', userId);
+    if (error) throw new Error(error.message);
+    return data;
   }
 
-  async update(id: number, changes: any) {
-    try {
-      const { data, error } = await this.supabaseService.client
-        .from('notes')
-        .update({ content: changes.content, title: changes.title })
-        .eq('id', id)
-      if (error) {
-        throw new Error(error.message);
-      }
-      console.log('Note updated successfully:', data);
-      return data;
-    } catch (error) {
-      console.error('Error updating note:', error);
-      throw error;
-    }
+  async updateNote(id: number, changes: Partial<Note>): Promise<Note[] | null> {
+    const { data, error } = await this.supabaseService.client
+      .from('notes')
+      .update({ content: changes.content, title: changes.title })
+      .eq('id', id);
+    if (error) throw new Error(error.message);
+    return data;
   }
 
-  async create(note: any) {
-    try {
-      const { data, error } = await this.supabaseService.client
-        .from('notes')
-        .insert(note)
-      if (error) {
-        throw new Error(error.message);
-      }
-      console.log('Note created successfully:', data);
-      return data;
-    } catch (error) {
-      console.error('Error creating note:', error);
-      throw error;
-    }
+  async createNote(note: Note): Promise<Note[] | null> {
+    const { data, error } = await this.supabaseService.client.from('notes').insert(note);
+    if (error) throw new Error(error.message);
+    return data;
   }
 
-  async delete(id: number) {
-    try {
-      const { data, error } = await this.supabaseService.client
-        .from('notes')
-        .delete()
-        .eq('id', id)
-      if (error) {
-        throw new Error(error.message);
-      }
-      console.log('Note deleted successfully:', data);
-      return data;
-    } catch (error) {
-      console.error('Error deleting note:', error);
-      throw error;
-    }
+  async deleteNote(id: number): Promise<Note[] | null> {
+    const { data, error } = await this.supabaseService.client.from('notes').delete().eq('id', id);
+    if (error) throw new Error(error.message);
+    return data;
   }
 }
