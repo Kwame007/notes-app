@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth.service';
 export class AuthFormComponent {
   isSignup = false;
   isLogin = false;
-  user: any = null; // Replace 'any' with your actual user type
+  user: any = null;
   errorMessage: string = '';
 
   formData = {
@@ -30,38 +30,29 @@ export class AuthFormComponent {
     if (form.invalid) return;
     this.errorMessage = '';
     if (this.isSignup) {
-      // Handle signup
       this.authService
         .signUp(this.formData.email, this.formData.password)
         .then((data) => {
-          // set login state to true
           this.isLogin = true;
           this.user = data.user;
           this.errorMessage = '';
-          console.log('Signup successful:', data);
         })
         .catch((error) => {
           this.isLogin = false;
           this.errorMessage = error.message || 'Signup failed. Please try again.';
-          console.error('Signup error:', error);
         });
-      console.log('Signup data:', this.formData);
     } else {
-      // Handle login
       this.authService
         .login(this.formData.email, this.formData.password)
         .then((data) => {
           this.isLogin = true;
           this.user = data.user;
           this.errorMessage = '';
-          console.log('Login successful:', data);
         })
         .catch((error) => {
           this.isLogin = false;
           this.errorMessage = error.message || 'Login failed. Please try again.';
-          console.error('Login error:', error);
         });
-      console.log('Login data:', this.formData);
     }
   }
 
@@ -69,8 +60,7 @@ export class AuthFormComponent {
     try {
       await this.authService.logout();
       this.isLogin = false;
-      this.user = null; // Reset user state
-      console.log('Logout successful');
+      this.user = null; 
     } catch (error) {
       console.error('Logout error:', error);
     }
