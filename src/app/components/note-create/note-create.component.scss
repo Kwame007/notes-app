@@ -1,0 +1,222 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+@import '../../../styles/typography';
+
+// Container
+.note-create-container {
+  background: $neutral-50;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0;
+}
+
+// Header
+.note-create-header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: $neutral-0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 56px;
+  z-index: 10;
+
+  .back-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    color: $neutral-900;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0;
+    font-family: $font-sans;
+    font-weight: 500;
+    transition: color 0.2s;
+    &:hover {
+      color: $blue-500;
+    }
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    .cancel-btn {
+      background: none;
+      border: none;
+      color: $neutral-500;
+      font-size: 16px;
+      cursor: pointer;
+      font-family: $font-sans;
+      font-weight: 500;
+      transition: color 0.2s;
+      &:hover {
+        color: $neutral-900;
+      }
+    }
+    .save-btn {
+      background: none;
+      border: none;
+      color: $blue-500;
+      font-size: 16px;
+      cursor: pointer;
+      font-family: $font-sans;
+      font-weight: 600;
+      transition: color 0.2s;
+      &:hover {
+        color: $blue-700;
+      }
+      &:disabled {
+        color: $neutral-400;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+// Main card
+.note-create-main {
+  background: $neutral-0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  & > div {
+    border-top: 1px solid $neutral-200;
+  }
+}
+
+.note-title-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: $neutral-900;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  &::placeholder {
+    color: $neutral-400;
+    font-weight: 400;
+  }
+}
+
+.note-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 8px;
+  border-top: 1px solid $neutral-200;
+  border-bottom: 1px solid $neutral-200;
+
+  .note-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 32px;
+    .meta-icon {
+      width: 18px;
+      height: 18px;
+      opacity: 0.7;
+    }
+    .meta-label {
+      color: $neutral-500;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .tags-input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: $neutral-900;
+      font-size: 14px;
+      margin-left: 4px;
+      &::placeholder {
+        color: $neutral-300;
+      }
+    }
+    .meta-value {
+      color: $neutral-400;
+      font-size: 14px;
+      margin-left: 4px;
+    }
+  }
+}
+
+.note-content-input {
+  width: 100%;
+  min-height: 180px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: $neutral-900;
+  font-size: 16px;
+  font-family: $font-serif;
+  resize: vertical;
+  &::placeholder {
+    color: $neutral-300;
+    font-family: $font-sans;
+  }
+}
+
+// Bottom Navigation
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 56px;
+  background: $neutral-0;
+  border-top: 1px solid $neutral-200;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 20;
+  .nav-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    &.active,
+    &:hover {
+      opacity: 1;
+    }
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+// Error Message
+.error-message {
+  background: $red-100;
+  color: $red-500;
+  padding: 12px 20px;
+  margin: 0 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: $font-sans;
+  font-weight: 500;
+  border: 1px solid $red-500;
+}

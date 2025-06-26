@@ -1,3 +1,12 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+@import '../styles/typography';
+
+.app-container {
+  min-height: 100vh;
+  font-family: $font-sans;
+}
+
 .landing-container {
   min-height: 100vh;
   display: flex;
@@ -5,19 +14,16 @@
   justify-content: center;
   align-items: center;
   background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
-  font-family: "Segoe UI", Arial, sans-serif;
 }
 
 .landing-container h1 {
-  font-size: 3rem;
-  font-weight: 700;
+  @include font-sans(bold, '3xl', md);
   margin-bottom: 0.5rem;
   color: #3730a3;
-  letter-spacing: 1px;
 }
 
 .landing-container p {
-  font-size: 1.25rem;
+  @include font-sans(regular, lg, sm);
   color: #4b5563;
   margin-bottom: 2rem;
 }
@@ -29,8 +35,7 @@
 
 .button-group button {
   padding: 0.75rem 2rem;
-  font-size: 1.1rem;
-  font-weight: 600;
+  @include font-sans('semi-bold', md, sm);
   border: none;
   border-radius: 8px;
   background: #6366f1;

@@ -1,0 +1,99 @@
+// 1. COLOR SYSTEM
+$neutral-950: #0e121b;
+$neutral-900: #191b25;
+$neutral-800: #232530;
+$neutral-700: #2b303b;
+$neutral-600: #525866;
+$neutral-500: #717784;
+$neutral-400: #99a0ae;
+$neutral-300: #cacfd8;
+$neutral-200: #e0e4ea;
+$neutral-100: #f3f5f8;
+$neutral-50: #f5f7fa;
+$neutral-0: #ffffff;
+
+$blue-700: #2547d0;
+$blue-500: #335cff;
+$blue-50: #ebf1ff;
+
+$green-500: #21c16b;
+$green-100: #d1fbe9;
+
+$red-500: #fb3748;
+$red-100: #ffd5d8;
+
+// 2. TYPOGRAPHY
+$font-sans: 'Inter', sans-serif;
+$font-serif: 'Noto Serif', serif;
+$font-mono: 'Source Code Pro', monospace;
+
+// Font weights
+$font-weights: (
+  thin: 100,
+  light: 300,
+  regular: 400,
+  medium: 500,
+  'semi-bold': 600,
+  bold: 700,
+  'extra-bold': 800,
+  black: 900,
+);
+
+$font-sizes: (
+  xs: 12px,
+  sm: 14px,
+  md: 16px,
+  lg: 20px,
+  xl: 24px,
+  '2xl': 32px,
+  '3xl': 40px,
+  '4xl': 48px,
+);
+
+$line-height: 1.2;
+$letter-spacing: (
+  xs: -0.2px,
+  sm: -0.3px,
+  md: -0.5px,
+);
+
+// 3. SPACING SCALE
+$spacing: (
+  0: 0,
+  025: 2px,
+  050: 4px,
+  075: 6px,
+  100: 8px,
+  150: 12px,
+  200: 16px,
+  250: 20px,
+  300: 24px,
+  400: 32px,
+  500: 40px,
+  600: 48px,
+  800: 64px,
+  1000: 80px,
+);
+
+// 4. RADIUS
+$radius: (
+  0: 0,
+  4: 4px,
+  6: 6px,
+  8: 8px,
+  10: 10px,
+  12: 12px,
+  16: 16px,
+  20: 20px,
+  24: 24px,
+  full: 999px,
+);
+
+// 5. SHADOWS (example)
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.15);
+
+// 6. GRID
+$container-padding: 32px;
+$sidebar-width: 272px;

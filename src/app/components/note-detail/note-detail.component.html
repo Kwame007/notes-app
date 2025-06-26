@@ -1,0 +1,41 @@
+<div class="note-detail-container">
+  <!-- Header -->
+  <header class="note-detail-header">
+    <button class="back-btn" aria-label="Go Back">
+      <img src="assets/images/icon-arrow-left.svg" alt="Go Back" />
+      Go Back
+    </button>
+    <div class="header-actions">
+      <button class="icon-btn" aria-label="Delete">
+        <img src="assets/images/icon-delete.svg" alt="Delete" />
+      </button>
+      <button class="icon-btn" aria-label="Cancel">Cancel</button>
+      <button class="save-btn" aria-label="Save Note">Save Note</button>
+    </div>
+  </header>
+
+  <main class="note-detail-main">
+    <ng-container *ngIf="loading">Loading...</ng-container>
+    <ng-container *ngIf="error">{{ error }}</ng-container>
+    <ng-container *ngIf="!loading && !error && note as n">
+      <h1 class="note-title text-sans-xl">{{ n.title }}</h1>
+      <div class="note-meta">
+        <span class="note-tags">
+          <ng-container *ngFor="let tag of n.tags">
+            <span class="note-tag">{{ tag }}</span>
+          </ng-container>
+        </span>
+        <span class="note-date">
+          <img src="assets/images/icon-clock.svg" alt="Last edited" />
+          Last edited {{ n.updated_at ? (n.updated_at | date: 'dd MMM yyyy') : '' }}
+        </span>
+      </div>
+      <div class="note-content text-serif-md">
+        {{ n.content }}
+      </div>
+      <div class="note-todo" *ngIf="n.content && n.content.includes('TODO')">
+        TODO: <span>{{ n.content.split('TODO:')[1] || '' }}</span>
+      </div>
+    </ng-container>
+  </main>
+</div>

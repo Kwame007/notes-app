@@ -13,14 +13,19 @@ export class NotesServiceService {
   ) {}
 
   async getNotes(): Promise<Note[] | null> {
-    const userId = await this.authService.getUserId();
+    if (!this.authService.isLoggedIn) {
+      throw new Error('User not authenticated');
+    }
 
-    if (!userId) throw new Error('User not authenticated');
+    const user = await this.authService.getCurrentUser();
+    if (!user || !user.id) {
+      throw new Error('User not authenticated');
+    }
 
     const { data, error } = await this.supabaseService.client
       .from('notes')
       .select('*')
-      // .eq('user_id', userId);
+      .eq('user_id', user.id);
     if (error) throw new Error(error.message);
     return data;
   }
@@ -34,14 +39,29 @@ export class NotesServiceService {
     return data;
   }
 
-  async createNote(note: Note): Promise<Note[] | null> {
-    const { data, error } = await this.supabaseService.client.from('notes').insert(note);
+  async createNote(note: Note): Promise<Note | null> {
+    const { data, error } = await this.supabaseService.client
+      .from('notes')
+      .insert(note)
+      .select()
+      .single();
+    console.log('createNote', data, error);
     if (error) throw new Error(error.message);
     return data;
   }
 
   async deleteNote(id: number): Promise<Note[] | null> {
     const { data, error } = await this.supabaseService.client.from('notes').delete().eq('id', id);
+    if (error) throw new Error(error.message);
+    return data;
+  }
+
+  async getNoteById(id: string): Promise<Note | null> {
+    const { data, error } = await this.supabaseService.client
+      .from('notes')
+      .select('*')
+      .eq('id', id)
+      .single();
     if (error) throw new Error(error.message);
     return data;
   }

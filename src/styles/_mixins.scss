@@ -1,0 +1,45 @@
+@mixin font-style($weight, $size-key, $spacing-key: md, $family: sans) {
+  @if $family == sans {
+    font-family: $font-sans;
+  } @else if $family == serif {
+    font-family: $font-serif;
+  } @else if $family == mono {
+    font-family: $font-mono;
+  }
+  font-weight: $weight;
+  font-size: map-get($font-sizes, $size-key);
+  line-height: $line-height;
+  letter-spacing: map-get($letter-spacing, $spacing-key);
+}
+
+@mixin font-sans($weight: regular, $size: md, $spacing: md) {
+  font-family: $font-sans;
+  font-weight: $weight;
+  font-size: map-get($font-sizes, $size);
+  line-height: $line-height;
+  letter-spacing: map-get($letter-spacing, $spacing);
+}
+
+@mixin font-serif($weight: regular, $size: md, $spacing: md) {
+  font-family: $font-serif;
+  font-weight: $weight;
+  font-size: map-get($font-sizes, $size);
+  line-height: $line-height;
+  letter-spacing: map-get($letter-spacing, $spacing);
+}
+
+@mixin font-mono($weight: regular, $size: md, $spacing: md) {
+  font-family: $font-mono;
+  font-weight: $weight;
+  font-size: map-get($font-sizes, $size);
+  line-height: $line-height;
+  letter-spacing: map-get($letter-spacing, $spacing);
+}
+
+@mixin radius($key) {
+  border-radius: map-get($radius, $key);
+}
+
+@mixin spacing($property, $key) {
+  #{$property}: map-get($spacing, $key);
+}

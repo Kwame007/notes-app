@@ -6,15 +6,16 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-auth-form',
   imports: [FormsModule],
   templateUrl: './auth-form.component.html',
-  styleUrl: './auth-form.component.scss',
+  styleUrls: ['./auth-form.component.scss'],
 })
 export class AuthFormComponent {
   isSignup = false;
   isLogin = false;
   user: any = null;
   errorMessage: string = '';
+  showPassword = false;
 
-  formData = {
+  model = {
     email: '',
     password: '',
   };
@@ -31,11 +32,16 @@ export class AuthFormComponent {
     this.errorMessage = '';
     if (this.isSignup) {
       this.authService
-        .signUp(this.formData.email, this.formData.password)
+        .signUp(this.model.email, this.model.password)
         .then((data) => {
-          this.isLogin = true;
-          this.user = data.user;
-          this.errorMessage = '';
+          if (data.error) {
+            this.isLogin = false;
+            this.errorMessage = data.error.message || 'Signup failed. Please try again.';
+          } else {
+            this.isLogin = true;
+            this.user = data.data.user;
+            this.errorMessage = '';
+          }
         })
         .catch((error) => {
           this.isLogin = false;
@@ -43,26 +49,21 @@ export class AuthFormComponent {
         });
     } else {
       this.authService
-        .login(this.formData.email, this.formData.password)
+        .login(this.model.email, this.model.password)
         .then((data) => {
-          this.isLogin = true;
-          this.user = data.user;
-          this.errorMessage = '';
+          if (data.error) {
+            this.isLogin = false;
+            this.errorMessage = data.error.message || 'Login failed. Please try again.';
+          } else {
+            this.isLogin = true;
+            this.user = data.data.user;
+            this.errorMessage = '';
+          }
         })
         .catch((error) => {
           this.isLogin = false;
           this.errorMessage = error.message || 'Login failed. Please try again.';
         });
-    }
-  }
-
-  async logout() {
-    try {
-      await this.authService.logout();
-      this.isLogin = false;
-      this.user = null; 
-    } catch (error) {
-      console.error('Logout error:', error);
     }
   }
 }

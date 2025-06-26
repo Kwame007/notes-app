@@ -1,0 +1,57 @@
+<div class="dashboard-container">
+  <!-- Header -->
+  <header class="dashboard-header">
+    <img src="assets/images/logo.svg" alt="Notes logo" class="note-logo-img" />
+    <!-- <span class="dashboard-title">Notes</span> -->
+  </header>
+  <div class="dashboard-main-container">
+    <main class="dashboard-main">
+      <h1 class="all-notes-title">All Notes</h1>
+      <ng-container *ngIf="loading">Loading...</ng-container>
+      <ng-container *ngIf="error">{{ error }}</ng-container>
+      <ng-container *ngIf="!loading && !error && notes.length === 0">
+        <div class="empty-state">No notes found.</div>
+      </ng-container>
+      <ul class="notes-list" *ngIf="!loading && !error && notes.length > 0">
+        <li
+          class="note-item"
+          *ngFor="let note of notes"
+          (click)="onNoteClick(note)"
+          style="cursor: pointer"
+        >
+          <div class="note-title">{{ note.title }}</div>
+          <div class="note-tags">
+            <span class="note-tag" *ngFor="let tag of note.tags">{{ tag }}</span>
+          </div>
+          <!-- <div class="note-date">
+          {{ note.updated_at ? (note.updated_at | date: 'dd MMM yyyy') : '' }}
+        </div> -->
+        </li>
+      </ul>
+    </main>
+
+    <!-- Floating Action Button -->
+    <button class="fab" aria-label="Add Note" (click)="onCreateNoteClick()">
+      <img src="assets/images/icon-plus.svg" style="color: brown;" alt="Add" />
+    </button>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <button class="nav-btn active" aria-label="Home">
+        <img src="assets/images/icon-home.svg" alt="Home" />
+      </button>
+      <button class="nav-btn" aria-label="Search">
+        <img src="assets/images/icon-search.svg" alt="Search" />
+      </button>
+      <button class="nav-btn" aria-label="Archive">
+        <img src="assets/images/icon-archive.svg" alt="Archive" />
+      </button>
+      <button class="nav-btn" aria-label="Tags">
+        <img src="assets/images/icon-tag.svg" alt="Tags" />
+      </button>
+      <button class="nav-btn" aria-label="Settings">
+        <img src="assets/images/icon-settings.svg" alt="Settings" />
+      </button>
+    </nav>
+  </div>
+</div>

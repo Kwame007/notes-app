@@ -1,0 +1,116 @@
+// Sans-serif typography classes
+.text-sans-xs {
+  @include font-sans(regular, xs, xs);
+}
+.text-sans-sm {
+  @include font-sans(medium, sm, xs);
+}
+.text-sans-md {
+  @include font-sans('semi-bold', md, sm);
+}
+.text-sans-lg {
+  @include font-sans(bold, lg, md);
+}
+.text-sans-xl {
+  @include font-sans(bold, xl, md);
+}
+.text-sans-2xl {
+  @include font-sans('extra-bold', '2xl', md);
+}
+.text-sans-3xl {
+  @include font-sans(black, '3xl', md);
+}
+.text-sans-4xl {
+  @include font-sans(black, '4xl', md);
+}
+
+// Serif typography classes
+.text-serif-xs {
+  @include font-serif(regular, xs, xs);
+}
+.text-serif-sm {
+  @include font-serif(medium, sm, xs);
+}
+.text-serif-md {
+  @include font-serif('semi-bold', md, sm);
+}
+.text-serif-lg {
+  @include font-serif(bold, lg, md);
+}
+.text-serif-xl {
+  @include font-serif(bold, xl, md);
+}
+.text-serif-2xl {
+  @include font-serif('extra-bold', '2xl', md);
+}
+.text-serif-3xl {
+  @include font-serif(black, '3xl', md);
+}
+.text-serif-4xl {
+  @include font-serif(black, '4xl', md);
+}
+
+// Monospace typography classes
+.text-mono-xs {
+  @include font-mono(regular, xs, xs);
+}
+.text-mono-sm {
+  @include font-mono(medium, sm, xs);
+}
+.text-mono-md {
+  @include font-mono('semi-bold', md, sm);
+}
+.text-mono-lg {
+  @include font-mono(bold, lg, md);
+}
+.text-mono-xl {
+  @include font-mono(bold, xl, md);
+}
+.text-mono-2xl {
+  @include font-mono('extra-bold', '2xl', md);
+}
+.text-mono-3xl {
+  @include font-mono(black, '3xl', md);
+}
+.text-mono-4xl {
+  @include font-mono(black, '4xl', md);
+}
+
+// Font weight utility classes
+.font-thin {
+  font-weight: map-get($font-weights, thin);
+}
+.font-light {
+  font-weight: map-get($font-weights, light);
+}
+.font-regular {
+  font-weight: map-get($font-weights, regular);
+}
+.font-medium {
+  font-weight: map-get($font-weights, medium);
+}
+.font-semibold {
+  font-weight: map-get($font-weights, 'semi-bold');
+}
+.font-bold {
+  font-weight: map-get($font-weights, bold);
+}
+.font-extrabold {
+  font-weight: map-get($font-weights, 'extra-bold');
+}
+.font-black {
+  font-weight: map-get($font-weights, black);
+}
+
+// Font family utility classes
+.font-sans {
+  font-family: $font-sans;
+}
+.font-serif {
+  font-family: $font-serif;
+}
+.font-mono {
+  font-family: $font-mono;
+}
+
+/* Repeat similarly for .text-serif-* and .text-mono-* */

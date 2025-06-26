@@ -1,0 +1,74 @@
+<div class="note-create-container">
+  <!-- Header -->
+  <header class="note-create-header">
+    <button class="back-btn" aria-label="Go Back" (click)="goBack()">
+      <img src="assets/images/icon-arrow-left.svg" alt="Go Back" />
+      Go Back
+    </button>
+    <div class="header-actions">
+      <button class="cancel-btn" aria-label="Cancel" (click)="cancel()">Cancel</button>
+      <button class="save-btn" aria-label="Save Note" (click)="saveNote()" [disabled]="isSaving">
+        {{ isSaving ? 'Saving...' : 'Save Note' }}
+      </button>
+    </div>
+  </header>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <main class="note-create-main">
+    <div>
+      <input
+        class="note-title-input text-sans-xl font-bold"
+        type="text"
+        placeholder="Enter a title..."
+        [(ngModel)]="noteTitle"
+        autocomplete="off"
+      />
+    </div>
+    <div class="note-meta">
+      <div class="note-meta-row">
+        <img src="assets/images/icon-tag.svg" alt="Tags" class="meta-icon" />
+        <span class="meta-label text-sans-md">Tags</span>
+        <input
+          class="tags-input text-sans-md"
+          type="text"
+          placeholder="Add tags separated by commas (e.g. Work, Planning)"
+          [(ngModel)]="noteTags"
+          autocomplete="off"
+        />
+      </div>
+      <div class="note-meta-row">
+        <span class="meta-label text-sans-md">Last edited</span>
+        <span class="meta-value text-sans-md">Not yet saved</span>
+      </div>
+    </div>
+    <textarea
+      class="note-content-input text-serif-md"
+      placeholder="Start typing your note here..."
+      [(ngModel)]="noteContent"
+      rows="10"
+    ></textarea>
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <button class="nav-btn active" aria-label="Home">
+      <img src="assets/images/icon-home.svg" alt="Home" />
+    </button>
+    <button class="nav-btn" aria-label="Search">
+      <img src="assets/images/icon-search.svg" alt="Search" />
+    </button>
+    <button class="nav-btn" aria-label="Archive">
+      <img src="assets/images/icon-archive.svg" alt="Archive" />
+    </button>
+    <button class="nav-btn" aria-label="Tags">
+      <img src="assets/images/icon-tag.svg" alt="Tags" />
+    </button>
+    <button class="nav-btn" aria-label="Settings">
+      <img src="assets/images/icon-settings.svg" alt="Settings" />
+    </button>
+  </nav>
+</div>

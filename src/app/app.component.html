@@ -1,6 +1,3 @@
-@if (isAuthenticated) {
-  <p>All notes by user</p>
-  <button (click)="logout()">Logout</button>
-} @else {
-  <app-auth-form />
-}
+<div class="app-container">
+  <router-outlet />
+</div>

@@ -1,0 +1,118 @@
+@import './variables';
+@import './mixins';
+@import './typography';
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../assets/fonts/inter/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('../assets/fonts/inter/Inter-Italic-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Noto Serif';
+  src: url('../assets/fonts/noto-serif/NotoSerif-VariableFont_wdth,wght.ttf') format('truetype');
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Noto Serif';
+  src: url('../assets/fonts/noto-serif/NotoSerif-Italic-VariableFont_wdth,wght.ttf')
+    format('truetype');
+  font-weight: 200 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Source Code Pro';
+  src: url('../assets/fonts/source-code-pro/SourceCodePro-VariableFont_wght.ttf') format('truetype');
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Source Code Pro';
+  src: url('../assets/fonts/source-code-pro/SourceCodePro-Italic-VariableFont_wght.ttf')
+    format('truetype');
+  font-weight: 200 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+html,
+body {
+  font-family: $font-sans;
+  font-size: 16px;
+  background: $neutral-50;
+  color: $neutral-900;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-sans;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 0.5em 0;
+}
+
+h1 {
+  @include font-sans(bold, '2xl', md);
+}
+h2 {
+  @include font-sans(bold, xl, md);
+}
+h3 {
+  @include font-sans(bold, lg, md);
+}
+h4 {
+  @include font-sans('semi-bold', md, sm);
+}
+h5 {
+  @include font-sans('semi-bold', sm, xs);
+}
+h6 {
+  @include font-sans(medium, sm, xs);
+}
+
+p {
+  margin: 0 0 1em 0;
+  @include font-sans(regular, md, sm);
+}
+
+input,
+textarea,
+select,
+button {
+  font-family: $font-sans;
+}
+
+code,
+pre {
+  font-family: $font-mono;
+}
+
+a {
+  color: $blue-500;
+  text-decoration: none;
+  transition: color 0.2s;
+
+  &:hover {
+    color: $blue-700;
+    text-decoration: underline;
+  }
+}
