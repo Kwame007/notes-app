@@ -1,0 +1,96 @@
+.archived-notes-container {
+  max-width: 600px;
+  margin: 32px auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.archived-note-item {
+  border-bottom: 1px solid #eee;
+  padding: 16px 0;
+  margin-bottom: 8px;
+}
+
+.note-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.note-content {
+  margin: 8px 0;
+  color: #444;
+}
+
+.note-tags {
+  margin-bottom: 8px;
+}
+
+.note-tag {
+  display: inline-block;
+  background: #f0f0f0;
+  color: #333;
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 0.85rem;
+  margin-right: 6px;
+}
+
+button {
+  background: #335cff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 16px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+button:hover {
+  background: #2547d0;
+}
+
+.error-message {
+  color: #fb3748;
+  background: #ffd5d8;
+  border: 1px solid #fb3748;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.empty-state-box {
+  background: #f6f8fa;
+  border: 1px solid #e3e8ef;
+  border-radius: 16px;
+  padding: 1.5rem 1.5rem;
+  margin-top: 2rem;
+  color: #444;
+  font-size: 1.05rem;
+  box-shadow: 0 1px 4px rgba(30, 34, 90, 0.06);
+  font-weight: 400;
+}
+
+.create-note-link {
+  color: #335cff;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.empty-state-box p {
+  margin: 0;
+  line-height: 1.6;
+}
