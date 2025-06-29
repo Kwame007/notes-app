@@ -65,4 +65,23 @@ export class NotesServiceService {
     if (error) throw new Error(error.message);
     return data;
   }
+
+  async getArchivedNotes(): Promise<Note[] | null> {
+    if (!this.authService.isLoggedIn) {
+      throw new Error('User not authenticated');
+    }
+
+    const user = await this.authService.getCurrentUser();
+    if (!user || !user.id) {
+      throw new Error('User not authenticated');
+    }
+
+    const { data, error } = await this.supabaseService.client
+      .from('notes')
+      .select('*')
+      .eq('user_id', user.id)
+      .eq('isArchived', true);
+    if (error) throw new Error(error.message);
+    return data;
+  }
 }

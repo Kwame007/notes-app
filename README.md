@@ -1,59 +1,95 @@
 # NoteApp
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.14.
+A modern note-taking web application built with Angular and Supabase. Organize, create, and manage your notes with a clean UI and secure authentication.
 
-## Development server
+---
 
-To start a local development server, run:
+## Project Description
 
-```bash
-ng serve
-```
+NoteApp is a full-featured note-taking app that allows users to create, edit, archive, and manage notes. It features user authentication, tag management, and a responsive, accessible design. All data is securely stored using Supabase.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## Setup & Run Instructions
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+1. **Install dependencies:**
 
-```bash
-ng generate component component-name
-```
+   ```bash
+   npm install
+   ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+2. **Set up environment variables:**
+   - Create a `.env` file or set the following in your environment:
+     ```
+     NG_APP_SUPABASE_URL=your_supabase_url
+     NG_APP_SUPABASE_KEY=your_supabase_key
+     ```
 
-```bash
-ng generate --help
-```
+3. **Run the development server:**
 
-## Building
+   ```bash
+   npm start
+   ```
 
-To build the project run:
+   Visit [http://localhost:4200](http://localhost:4200) in your browser.
 
-```bash
-ng build
-```
+4. **Build for production:**
+   ```bash
+   npm run build
+   ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+## Key Features
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- **User Authentication:** Sign up, log in, and log out securely (email/password & Google OAuth).
+- **Create & Edit Notes:** Rich note creation and editing with title, content, and tags.
+- **Archive & Restore:** Archive notes and restore them anytime.
+- **Tag Management:** Add tags to notes for easy organization.
+- **Responsive UI:** Works great on desktop and mobile.
+- **Supabase Backend:** All data is stored and synced via Supabase.
+- **Protected Routes:** Only authenticated users can access notes.
 
-```bash
-ng test
-```
+---
 
-## Running end-to-end tests
+## Technologies Used
 
-For end-to-end (e2e) testing, run:
+- **Angular 19**
+- **Supabase** (`@supabase/supabase-js`)
+- **RxJS**
+- **SCSS** (custom theming)
+- **@ngx-env/builder** (for environment management)
+- **Karma/Jasmine** (unit testing)
 
-```bash
-ng e2e
-```
+---
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Component Overview
 
-## Additional Resources
+- **AuthFormComponent:** Handles user login, registration, and Google OAuth.
+- **NotesDashboardComponent:** Displays all user notes, search, and navigation.
+- **NoteCreateComponent:** Form for creating new notes with title, content, and tags.
+- **NoteDetailComponent:** View and edit a single note in detail.
+- **ArchivedNotesComponent:** View and manage archived notes.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+**Core Services:**
+
+- **AuthService:** Handles authentication and session management.
+- **NotesServiceService:** CRUD operations for notes.
+- **SupabaseService:** Supabase client integration.
+- **AuthGuard:** Protects routes from unauthenticated access.
+
+---
+
+## Bonus Features (if implemented)
+
+- **Dark Mode:** Toggle between light and dark themes.
+- **Google OAuth:** One-click login with Google.
+- **Rich Text Editing:** Enhanced note formatting.
+- **Search & Filter:** Quickly find notes by title, content, or tags.
+- **PWA Support:** Installable on mobile devices.
+
+---
+
+## License
+
+MIT

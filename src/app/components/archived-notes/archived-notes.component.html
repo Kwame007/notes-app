@@ -1,1 +1,50 @@
-<p>archived-notes works!</p>
+<div class="archived-notes-container">
+  <!-- Header -->
+  <header class="dashboard-header">
+    <img src="assets/images/logo.svg" alt="Notes logo" class="note-logo-img" />
+  </header>
+
+  <div class="archived-notes-main">
+    <h2>Archived Notes</h2>
+
+    <div *ngIf="loading">Loading archived notes...</div>
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+
+    <div *ngIf="!loading && archivedNotes.length === 0 && !error" class="empty-state-box">
+      <p>
+        No notes have been archived yet. Move notes here for safekeeping, or
+        <a routerLink="/create" class="create-note-link">create a new note.</a>
+      </p>
+    </div>
+
+    <ul *ngIf="!loading && archivedNotes.length > 0">
+      <li *ngFor="let note of archivedNotes" class="archived-note-item">
+        <div class="note-title">{{ note.title }}</div>
+        <div class="note-content">{{ note.content }}</div>
+        <div class="note-tags">
+          <span *ngFor="let tag of note.tags" class="note-tag">{{ tag }}</span>
+        </div>
+        <button (click)="restoreNote(note)">Restore</button>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- Bottom Navigation (matches notes-dashboard) -->
+<nav class="bottom-nav">
+  <button class="nav-btn" aria-label="Home">
+    <img src="assets/images/icon-home.svg" alt="Home" />
+  </button>
+  <button class="nav-btn" aria-label="Search">
+    <img src="assets/images/icon-search.svg" alt="Search" />
+  </button>
+  <button class="nav-btn active" aria-label="Archive">
+    <img src="assets/images/icon-archive.svg" alt="Archive" />
+  </button>
+  <button class="nav-btn" aria-label="Tags">
+    <img src="assets/images/icon-tag.svg" alt="Tags" />
+  </button>
+  <button class="nav-btn" aria-label="Settings">
+    <img src="assets/images/icon-settings.svg" alt="Settings" />
+  </button>
+</nav>
