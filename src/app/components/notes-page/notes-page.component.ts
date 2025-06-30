@@ -41,14 +41,6 @@ export class NotePageComponent {
     this.router.navigate(['/notes/new']);
   }
 
-  onDeleteNote(noteId: string) {
-    // Handle note deletion
-  }
-
-  onArchiveNote(noteId: string) {
-    // Handle note archiving
-  }
-
   onSearchChange(query: string) {
     this.searchQuery = query;
   }
