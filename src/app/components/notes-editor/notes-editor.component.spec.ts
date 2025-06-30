@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ArchivedNotesComponent } from './archived-notes.component';
+import { NotesEditorComponent } from './notes-editor.component';
 
-describe('ArchivedNotesComponent', () => {
-  let component: ArchivedNotesComponent;
-  let fixture: ComponentFixture<ArchivedNotesComponent>;
+describe('NotesEditorComponent', () => {
+  let component: NotesEditorComponent;
+  let fixture: ComponentFixture<NotesEditorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ArchivedNotesComponent]
+      imports: [NotesEditorComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ArchivedNotesComponent);
+    fixture = TestBed.createComponent(NotesEditorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

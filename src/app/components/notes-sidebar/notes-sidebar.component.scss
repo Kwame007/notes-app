@@ -1,0 +1,338 @@
+.notes-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 20rem; // 80 * 0.25rem
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(4px);
+  border-right: 1px solid rgba(226, 232, 240, 0.6);
+  z-index: 30;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  @media (min-width: 768px) {
+    position: relative;
+    z-index: auto;
+  }
+
+  &__header {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  &__header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 0;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+  }
+
+  &__brand,
+  &__actions {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  &__brand-icon {
+    width: 2rem;
+    height: 2rem;
+    background: linear-gradient(to bottom right, #3b82f6, #8b5cf6);
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__brand-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    background: linear-gradient(to right, #1e293b, #475569);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+
+  &__toggle-btn {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    &:hover {
+      background: #f1f5f9;
+    }
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  &__new-note-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: flex-start;
+    background: linear-gradient(to right, #3b82f6, #8b5cf6);
+    color: #fff;
+    box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
+    height: 2.5rem;
+    padding: 0 0.75rem;
+    border-radius: 0.5rem;
+    border: none;
+    font-weight: 500;
+    transition:
+      background 0.2s,
+      box-shadow 0.2s;
+    &:hover {
+      background: linear-gradient(to right, #2563eb, #7c3aed);
+      box-shadow: 0 2px 8px 0 rgba(16, 24, 40, 0.1);
+    }
+  }
+
+  &__icon {
+    &--book {
+    }
+    &--plus {
+    }
+    &--sparkles {
+    }
+    &--menu {
+    }
+    &--search {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 1rem;
+      width: 1rem;
+      color: #94a3b8;
+      pointer-events: none;
+    }
+  }
+
+  &__search-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  &__search-input {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    height: 2.5rem;
+    background: rgba(248, 250, 252, 0.5);
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    outline: none;
+    transition:
+      border 0.2s,
+      box-shadow 0.2s;
+    &:focus {
+      border-color: #60a5fa;
+      box-shadow: 0 0 0 2px #dbeafe;
+    }
+
+    &--has-query {
+      border-color: #60a5fa;
+      background: rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  &__search-clear {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    color: #94a3b8;
+    transition: all 0.2s;
+
+    &:hover {
+      background: #f1f5f9;
+      color: #64748b;
+    }
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  &__search-results-header {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background: rgba(59, 130, 246, 0.05);
+    border-radius: 0.5rem;
+    border-left: 3px solid #3b82f6;
+  }
+
+  &__search-count {
+    font-weight: normal;
+    color: #64748b;
+    font-size: 0.75rem;
+  }
+
+  &__list-wrapper {
+    padding: 0.75rem;
+    overflow-y: auto;
+    height: calc(100vh - 200px);
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+  }
+
+  &__empty-icon-wrapper {
+    width: 4rem;
+    height: 4rem;
+    margin: 0 auto 1rem auto;
+    background: linear-gradient(to bottom right, #f1f5f9, #e2e8f0);
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__empty-title {
+    color: #64748b;
+    font-weight: 500;
+  }
+
+  &__empty-desc {
+    color: #94a3b8;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+
+  &__section-header {
+    font-size: 0.875rem; // text-sm
+    font-weight: 500; // font-medium
+    color: #475569; // text-slate-600
+    margin-bottom: 0.75rem; // mb-3
+    padding-left: 0.5rem; // px-2
+    padding-right: 0.5rem;
+  }
+
+  &__archived-header {
+    display: flex; // flex
+    align-items: center; // items-center
+    gap: 0.5rem; // gap-2
+    margin-bottom: 0.75rem; // mb-3
+    padding-left: 0.5rem; // px-2
+    padding-right: 0.5rem;
+  }
+
+  &__empty-icon {
+    height: 2rem; // h-8
+    width: 2rem; // w-8
+    color: #94a3b8; // text-slate-400
+  }
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+// Skeleton loading styles
+.notes-sidebar__skeleton {
+  padding: 1rem;
+}
+
+.notes-sidebar__skeleton-item {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.notes-sidebar__skeleton-title {
+  height: 1.25rem;
+  background: #e2e8f0;
+  border-radius: 0.25rem;
+  margin-bottom: 0.5rem;
+  width: 80%;
+}
+
+.notes-sidebar__skeleton-content {
+  height: 0.875rem;
+  background: #f1f5f9;
+  border-radius: 0.25rem;
+  margin-bottom: 0.75rem;
+  width: 100%;
+}
+
+.notes-sidebar__skeleton-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notes-sidebar__skeleton-date {
+  height: 0.75rem;
+  background: #f8fafc;
+  border-radius: 0.25rem;
+  width: 40%;
+}
+
+.notes-sidebar__skeleton-tags {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.notes-sidebar__skeleton-tag {
+  height: 0.75rem;
+  background: #f8fafc;
+  border-radius: 0.25rem;
+  width: 2rem;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

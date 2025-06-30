@@ -1,0 +1,268 @@
+<div class="notes-sidebar">
+  <div class="notes-sidebar__header">
+    <div class="notes-sidebar__header-row">
+      <div class="notes-sidebar__brand">
+        <div class="notes-sidebar__brand-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="notes-sidebar__icon notes-sidebar__icon--menu"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style="color: #fff"
+            class="lucide lucide-book-open-icon lucide-book-open"
+          >
+            <path d="M12 7v14" />
+            <path
+              d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
+            />
+          </svg>
+        </div>
+        <h1 class="notes-sidebar__brand-title">My Notes</h1>
+      </div>
+      <div class="notes-sidebar__actions">
+        <!-- AuthButton + SidebarTrigger would go here -->
+        <app-auth-button [isLoggedIn]="isLoggedIn" />
+      </div>
+    </div>
+
+    <div class="notes-sidebar__actions">
+      <button (click)="createNewNote()" class="notes-sidebar__new-note-btn">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="notes-sidebar__icon notes-sidebar__icon--plus"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-plus-icon lucide-plus"
+        >
+          <path d="M5 12h14" />
+          <path d="M12 5v14" />
+        </svg>
+
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-sparkles-icon lucide-sparkles"
+          >
+            <path
+              d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"
+            />
+            <path d="M20 3v4" />
+            <path d="M22 5h-4" />
+            <path d="M4 17v2" />
+            <path d="M5 18H3" />
+          </svg>
+          New Note
+        </div>
+      </button>
+
+      <div class="notes-sidebar__search-wrapper">
+        <svg
+          class="notes-sidebar__icon notes-sidebar__icon--search"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M21 21l-4.35-4.35M11 4a7 7 0 100 14 7 7 0 000-14z"
+          />
+        </svg>
+        <input
+          [(ngModel)]="searchQuery"
+          (ngModelChange)="handleSearchChange($event)"
+          placeholder="Search your notes..."
+          class="notes-sidebar__search-input"
+          [class.notes-sidebar__search-input--has-query]="searchQuery.trim()"
+        />
+        @if (searchQuery.trim()) {
+          <button
+            (click)="clearSearch()"
+            class="notes-sidebar__search-clear"
+            type="button"
+            aria-label="Clear search"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="notes-sidebar__list-wrapper">
+    <!-- Debug: currentNoteId = {{ currentNoteId }} -->
+    <div class="notes-sidebar__list">
+      <!-- Loading skeleton -->
+      @if (isLoading) {
+        <div class="notes-sidebar__skeleton">
+          @for (item of [1, 2, 3, 4, 5]; track item) {
+            <div class="notes-sidebar__skeleton-item">
+              <div class="notes-sidebar__skeleton-title"></div>
+              <div class="notes-sidebar__skeleton-content"></div>
+              <div class="notes-sidebar__skeleton-meta">
+                <div class="notes-sidebar__skeleton-date"></div>
+                <div class="notes-sidebar__skeleton-tags">
+                  <div class="notes-sidebar__skeleton-tag"></div>
+                  <div class="notes-sidebar__skeleton-tag"></div>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      }
+
+      <!-- Actual notes content -->
+      @if (!isLoading) {
+        <!-- Search results header -->
+        @if (searchQuery.trim() && (activeNotes.length > 0 || archivedNotes.length > 0)) {
+          <div class="notes-sidebar__search-results-header">
+            <h3 class="notes-sidebar__section-header">
+              Search Results for "{{ searchQuery }}"
+              <span class="notes-sidebar__search-count"
+                >({{ activeNotes.length + archivedNotes.length }} found)</span
+              >
+            </h3>
+          </div>
+        }
+
+        @if (activeNotes.length > 0) {
+          <div>
+            @if (!searchQuery.trim()) {
+              <h3 class="notes-sidebar__section-header">Active Notes</h3>
+            }
+            <div class="notes-sidebar__list">
+              @for (note of activeNotes; track note.id) {
+                <app-note-card
+                  [note]="note"
+                  [isSelected]="isNoteSelected(note.id)"
+                  [searchQuery]="searchQuery"
+                  (select)="note.id && selectNoteHandler(note.id)"
+                  (delete)="note.id && deleteNoteHandler(note.id)"
+                  (archive)="note.id && archiveNoteHandler(note.id)"
+                ></app-note-card>
+              }
+            </div>
+          </div>
+        }
+
+        @if (archivedNotes.length > 0) {
+          <div>
+            <div class="notes-sidebar__archived-header">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-archive-icon lucide-archive"
+              >
+                <rect width="20" height="5" x="2" y="3" rx="1" />
+                <path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8" />
+                <path d="M10 12h4" />
+              </svg>
+              @if (!searchQuery.trim()) {
+                <h3 class="notes-sidebar__section-header">Archived Notes</h3>
+              }
+            </div>
+            <div class="notes-sidebar__list">
+              @for (note of archivedNotes; track note.id) {
+                <app-note-card
+                  [note]="note"
+                  [isSelected]="isNoteSelected(note.id)"
+                  [isArchived]="true"
+                  [searchQuery]="searchQuery"
+                  (select)="note.id && selectNoteHandler(note.id)"
+                  (delete)="note.id && deleteNoteHandler(note.id)"
+                  (archive)="note.id && archiveNoteHandler(note.id)"
+                ></app-note-card>
+              }
+            </div>
+          </div>
+        }
+
+        <!-- No search results -->
+        @if (searchQuery.trim() && activeNotes.length === 0 && archivedNotes.length === 0) {
+          <div class="notes-sidebar__empty-state">
+            <div class="notes-sidebar__empty-icon-wrapper">
+              <svg
+                class="notes-sidebar__empty-icon"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 21l-4.35-4.35M11 4a7 7 0 100 14 7 7 0 000-14z"
+                />
+              </svg>
+            </div>
+            <p class="notes-sidebar__empty-title">No results found</p>
+            <p class="notes-sidebar__empty-desc">Try searching with different keywords</p>
+          </div>
+        }
+
+        <!-- No notes at all -->
+        @if (!searchQuery.trim() && notes.length === 0) {
+          <div class="notes-sidebar__empty-state">
+            <div class="notes-sidebar__empty-icon-wrapper">
+              <svg
+                class="notes-sidebar__empty-icon"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </div>
+            <p class="notes-sidebar__empty-title">No notes found</p>
+            <p class="notes-sidebar__empty-desc">Create your first note to get started</p>
+          </div>
+        }
+      }
+    </div>
+  </div>
+</div>

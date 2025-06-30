@@ -1,0 +1,13 @@
+<div class="notes-page">
+  <app-note-sidebar
+    (selectNote)="onSelectNote($event)"
+    (createNote)="onCreateNote()"
+    (deleteNote)="onDeleteNote($event)"
+    (archiveNote)="onArchiveNote($event)"
+    (searchChange)="onSearchChange($event)"
+  ></app-note-sidebar>
+
+  <div class="notes-page__main">
+    <router-outlet />
+  </div>
+</div>

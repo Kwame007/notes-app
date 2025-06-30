@@ -1,15 +1,13 @@
 import { Routes } from '@angular/router';
-import { NotesDashboardComponent } from './components/notes-dashboard/notes-dashboard.component';
-import { ArchivedNotesComponent } from './components/archived-notes/archived-notes.component';
-import { NoteDetailComponent } from './components/note-detail/note-detail.component';
-import { NoteCreateComponent } from './components/note-create/note-create.component';
 import { AuthFormComponent } from './components/auth-form/auth-form.component';
+import { NotePageComponent } from './components/notes-page/notes-page.component';
 import { authGuard } from './services/auth.guard';
+import { NoteEditorComponent } from './components/notes-editor/notes-editor.component';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'notes',
+    redirectTo: 'notes/new',
     pathMatch: 'full',
   },
   {
@@ -22,23 +20,23 @@ export const routes: Routes = [
   },
   {
     path: 'notes',
-    component: NotesDashboardComponent,
+    component: NotePageComponent,
     canActivate: [authGuard],
-  },
-  {
-    path: 'notes/:id',
-    component: NoteDetailComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'archived',
-    component: ArchivedNotesComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'create',
-    component: NoteCreateComponent,
-    canActivate: [authGuard],
+    children: [
+      {
+        path: '',
+        redirectTo: 'new',
+        pathMatch: 'full',
+      },
+      {
+        path: 'new',
+        component: NoteEditorComponent,
+      },
+      {
+        path: ':id',
+        component: NoteEditorComponent,
+      },
+    ],
   },
   // { path: '**', component: PageNotFoundComponent },
 ];

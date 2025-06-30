@@ -2,6 +2,13 @@
 @import './mixins';
 @import './typography';
 
+// Global box-sizing
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 @font-face {
   font-family: 'Inter';
   src: url('../assets/fonts/inter/Inter-VariableFont_opsz,wght.ttf') format('truetype');
