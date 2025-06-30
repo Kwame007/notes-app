@@ -1,0 +1,419 @@
+.note-editor {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  flex: 1;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(4px);
+
+  &__header {
+    border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(4px);
+  }
+
+  &__header-inner {
+    padding: 1.5rem; // p-6
+  }
+
+  &__header-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem; // gap-3
+    margin-bottom: 1rem; // mb-4
+  }
+
+  &__icon-container {
+    width: 2rem; // w-8
+    height: 2rem; // h-8
+    background: linear-gradient(to bottom right, #3b82f6, #8b5cf6); // from-blue-500 to-purple-600
+    border-radius: 0.5rem; // rounded-lg
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__editing-label {
+    font-size: 0.875rem; // text-sm
+    color: #64748b; // text-slate-500
+    font-weight: 500; // font-medium
+  }
+
+  &__title-input {
+    font-size: 1rem; // text-2xl
+    font-weight: bold;
+    border: none;
+    background: transparent;
+    padding: 0;
+    outline: none;
+    box-shadow: none;
+    width: 100%;
+    margin-bottom: 1rem; // mb-4
+    color: #1e293b; // text-slate-800
+    &::placeholder {
+      color: #94a3b8; // placeholder:text-slate-400
+    }
+    &:focus,
+    &:focus-visible {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
+  &__meta-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem; // gap-3
+    font-size: 0.75rem; // text-xs
+    color: #64748b; // text-slate-500
+    @media (min-width: 640px) {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; // gap-2
+    padding: 0.5rem 0.75rem; // px-3 py-2
+    border-radius: 0.5rem; // rounded-lg
+    &--created {
+      background: #f8fafc; // bg-slate-50
+    }
+    &--modified {
+      background: #eff6ff; // bg-blue-50
+    }
+  }
+
+  &__body {
+    flex: 1;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.8);
+  }
+
+  &__content-input {
+    min-height: 100%;
+    resize: none;
+    border: none;
+    background: transparent;
+    padding: 0;
+    font-size: 1rem; // text-base
+    line-height: 1.625; // leading-relaxed
+    outline: none;
+    box-shadow: none;
+    width: 100%;
+    color: #334155; // text-slate-700
+    &::placeholder {
+      color: #94a3b8; // placeholder:text-slate-400
+    }
+  }
+  svg {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+  }
+
+  // --- Tags Section Styles (Tailwind to SCSS conversion) ---
+  &__tags {
+    margin-bottom: 1rem; // mb-4
+  }
+
+  &__tags-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; // gap-2
+    margin-bottom: 0.5rem; // mb-2
+    .note-editor__icon {
+      width: 1rem; // h-4
+      height: 1rem; // w-4
+      color: #64748b; // text-slate-500
+    }
+  }
+
+  &__tags-label {
+    font-size: 0.875rem; // text-sm
+    color: #475569; // text-slate-600
+    font-weight: 500; // font-medium
+  }
+
+  &__tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem; // gap-2
+    margin-bottom: 0.5rem; // mb-2
+  }
+
+  &__tag {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem; // gap-1
+    font-size: 0.875rem; // text-sm
+    padding: 0.25rem 0.75rem; // px-3 py-1
+    background: #f8fafc; // bg-slate-50
+    border: 1px solid #cbd5e1; // border-slate-300
+    color: #334155; // text-slate-700
+    border-radius: 9999px;
+    font-weight: 500;
+    transition:
+      background 0.2s,
+      border 0.2s;
+  }
+
+  &__tag-remove {
+    background: none;
+    border: none;
+    padding: 0;
+    margin-left: 0.25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 9999px;
+    height: 1rem; // h-4
+    width: 1rem; // w-4
+    transition: background 0.2s;
+    &:hover {
+      background: #e2e8f0; // hover:bg-slate-200
+    }
+  }
+
+  &__tag-remove-icon {
+    width: 0.75rem; // h-3
+    height: 0.75rem; // w-3
+  }
+
+  &__tags-input-group {
+    display: flex;
+    gap: 0.5rem; // gap-2
+    width: 500px;
+    align-items: center;
+  }
+
+  &__tags-input {
+    flex: 1;
+    height: 2rem; // h-8
+    font-size: 0.875rem; // text-sm
+    background: #f8fafc; // bg-slate-50
+    border: 1px solid #cbd5e1; // border-slate-300
+    border-radius: 0.5rem;
+    padding: 0 0.75rem;
+    color: #334155;
+    outline: none;
+    transition: border 0.2s;
+    &::placeholder {
+      color: #94a3b8;
+    }
+    &:focus {
+      border-color: #6366f1; // border-indigo-500
+    }
+  }
+
+  &__tags-add-btn {
+    height: 2rem; // h-8
+    padding: 0 0.75rem; // px-3
+    font-size: 0.875rem; // text-sm
+    background: #fff;
+    color: #334155;
+    border: 1px solid #cbd5e1; // border-slate-300
+    border-radius: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+      background 0.2s,
+      border 0.2s;
+    &:hover {
+      background: #f1f5f9; // hover:bg-slate-100
+      border-color: #94a3b8;
+    }
+  }
+
+  // Loading state styles
+  &__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    flex: 1;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(4px);
+  }
+
+  &__loading-spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  &__loading-icon {
+    width: 2rem;
+    height: 2rem;
+    color: #64748b;
+    animation: spin 1s linear infinite;
+  }
+
+  &__loading-text {
+    font-size: 0.875rem;
+    color: #64748b;
+    font-weight: 500;
+  }
+
+  &__actions {
+    margin-left: auto;
+  }
+
+  &__save-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover:not(:disabled) {
+      background: #2563eb;
+    }
+
+    &:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+    }
+  }
+
+  &__save-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  &__update-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background: #10b981;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover:not(:disabled) {
+      background: #059669;
+    }
+
+    &:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+    }
+  }
+
+  &__update-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Error state styles
+.note-editor__error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  flex: 1;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(4px);
+  padding: 2rem;
+  text-align: center;
+}
+
+.note-editor__error-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 1rem;
+  background: #fef2f2;
+  border-radius: 50%;
+}
+
+.note-editor__error-svg {
+  width: 2rem;
+  height: 2rem;
+  color: #dc2626;
+}
+
+.note-editor__error-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.note-editor__error-message {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-bottom: 1.5rem;
+  max-width: 400px;
+}
+
+.note-editor__error-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.note-editor__error-retry-btn,
+.note-editor__error-new-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  border: 1px solid;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.note-editor__error-retry-btn {
+  background: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+
+  &:hover {
+    background: #2563eb;
+    border-color: #2563eb;
+  }
+}
+
+.note-editor__error-new-btn {
+  background: white;
+  color: #374151;
+  border-color: #d1d5db;
+
+  &:hover {
+    background: #f9fafb;
+    border-color: #9ca3af;
+  }
+}

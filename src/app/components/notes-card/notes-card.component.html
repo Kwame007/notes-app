@@ -1,0 +1,181 @@
+<div
+  (click)="onCardClick()"
+  class="note-card"
+  [ngClass]="{
+    'note-card--selected': isSelected,
+    'note-card--archived': isArchived && !isSelected,
+    'note-card--unselected': !isSelected && !isArchived,
+  }"
+>
+  <div class="note-card__header">
+    <div class="note-card__main">
+      <div class="note-card__title-row">
+        <div
+          class="note-card__status-dot"
+          [ngClass]="{
+            'note-card__status-dot--selected': isSelected,
+            'note-card__status-dot--archived': isArchived && !isSelected,
+            'note-card__status-dot--unselected': !isSelected && !isArchived,
+          }"
+        ></div>
+        <h3
+          class="note-card__title"
+          [ngClass]="{
+            'note-card__title--selected': isSelected,
+            'note-card__title--archived': isArchived && !isSelected,
+            'note-card__title--unselected': !isSelected && !isArchived,
+          }"
+          [innerHTML]="highlightText(note.title)"
+        ></h3>
+
+        @if (isArchived) {
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="note-card__icon note-card__icon--archived"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-archive-icon lucide-archive"
+          >
+            <rect width="20" height="5" x="2" y="3" rx="1" />
+            <path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8" />
+            <path d="M10 12h4" />
+          </svg>
+        }
+      </div>
+
+      <p
+        class="note-card__content"
+        [ngClass]="{
+          'note-card__content--archived': isArchived,
+          'note-card__content--unarchived': !isArchived,
+        }"
+        [innerHTML]="highlightText(note.content || 'No content')"
+      ></p>
+
+      @if (safeTags.length > 0) {
+        <div class="note-card__tags">
+          @for (tag of safeTags.slice(0, 3); track tag) {
+            <span
+              class="note-card__tag"
+              [ngClass]="{
+                'note-card__tag--archived': isArchived,
+                'note-card__tag--unarchived': !isArchived,
+              }"
+            >
+              {{ tag }}
+            </span>
+          }
+          @if (safeTags.length > 3) {
+            <span
+              class="note-card__tag"
+              [ngClass]="{
+                'note-card__tag--archived': isArchived,
+                'note-card__tag--unarchived': !isArchived,
+              }"
+            >
+              +{{ safeTags.length - 3 }}
+            </span>
+          }
+        </div>
+      }
+
+      <div class="note-card__meta">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="note-card__icon note-card__icon--clock"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-clock-icon lucide-clock"
+        >
+          <path d="M12 6v6l4 2" />
+          <circle cx="12" cy="12" r="10" />
+        </svg>
+        <span>{{ formatDate(note.updated_at) }}</span>
+      </div>
+    </div>
+
+    <div class="note-card__actions">
+      <button
+        (click)="onArchiveClick($event)"
+        class="note-card__archive-btn"
+        [attr.title]="isArchived ? 'Unarchive note' : 'Archive note'"
+      >
+        @if (isArchived) {
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="note-card__icon note-card__icon--archive"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-archive-restore-icon lucide-archive-restore"
+          >
+            <rect width="20" height="5" x="2" y="3" rx="1" />
+            <path d="M4 8v11a2 2 0 0 0 2 2h2" />
+            <path d="M20 8v11a2 2 0 0 1-2 2h-2" />
+            <path d="m9 15 3-3 3 3" />
+            <path d="M12 12v9" />
+          </svg>
+        }
+
+        @if (!isArchived) {
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="note-card__icon note-card__icon--archive"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-archive-icon lucide-archive"
+          >
+            <rect width="20" height="5" x="2" y="3" rx="1" />
+            <path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8" />
+            <path d="M10 12h4" />
+          </svg>
+        }
+      </button>
+
+      <button (click)="onDeleteClick($event)" class="note-card__delete-btn" title="Delete note">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="note-card__icon note-card__icon--trash"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-trash2-icon lucide-trash-2"
+        >
+          <path d="M3 6h18" />
+          <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+          <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+          <line x1="10" x2="10" y1="11" y2="17" />
+          <line x1="14" x2="14" y1="11" y2="17" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>

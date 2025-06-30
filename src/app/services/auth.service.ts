@@ -12,7 +12,6 @@ export class AuthService {
 
   constructor(private supabaseService: SupabaseService) {
     this.supabaseService.client.auth.onAuthStateChange((event, session) => {
-
       // store session in localstorage
       if (session?.user) {
         localStorage.setItem('session', JSON.stringify(session.user));
@@ -70,7 +69,6 @@ export class AuthService {
       error,
     } = await this.supabaseService.client.auth.getUser();
     if (error) {
-      console.error('Error getting current user:', error);
       return null;
     }
     return user;
@@ -78,25 +76,21 @@ export class AuthService {
 
   // Validate if the stored session is still valid
   async validateSession(): Promise<boolean> {
-    console.log('AuthService: Validating session...');
     const {
       data: { session },
       error,
     } = await this.supabaseService.client.auth.getSession();
 
     if (error) {
-      console.error('AuthService: Session validation error:', error);
       localStorage.removeItem('session');
       return false;
     }
 
     if (!session) {
-      console.log('AuthService: No active session found');
       localStorage.removeItem('session');
       return false;
     }
 
-    console.log('AuthService: Session validation successful');
     return true;
   }
 }

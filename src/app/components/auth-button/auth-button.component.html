@@ -1,0 +1,70 @@
+@if (isLoggedIn) {
+  <div class="auth-button auth-button--logged-in">
+    <div class="auth-button__user-info">
+      <div class="auth-button__avatar">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="auth-button__avatar-icon"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          style="color: #fff"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-user-icon lucide-user"
+        >
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+          <circle cx="12" cy="7" r="4" />
+        </svg>
+      </div>
+      <span class="auth-button__username">John Doe</span>
+    </div>
+    <button type="button" (click)="logOut()" class="auth-button__logout-btn">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="auth-button__logout-icon"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-log-out-icon lucide-log-out"
+      >
+        <path d="m16 17 5-5-5-5" />
+        <path d="M21 12H9" />
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+      </svg>
+    </button>
+  </div>
+} @else {
+  <!-- <button
+    type="button"
+    (click)="handleAuthClick()"
+    class="auth-button auth-button--login auth-button__login-btn"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="auth-button__login-icon"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="lucide lucide-log-in-icon lucide-log-in"
+    >
+      <path d="m10 17 5-5-5-5" />
+      <path d="M15 12H3" />
+      <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+    </svg>
+    Login
+  </button> -->
+}
